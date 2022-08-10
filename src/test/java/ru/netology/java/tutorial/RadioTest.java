@@ -42,7 +42,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldSetRadioStationIfNumberIsAboveMax() {
+    public void shouldNotSetRadioStationIfNumberIsAboveMax() {
         Radio station = new Radio();
 
         station.setCurrentRadioStation(10);
@@ -54,7 +54,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldSetRadioStationIfNumberIsBelowMin() {
+    public void shouldNotSetRadioStationIfNumberIsBelowMin() {
         Radio station = new Radio();
 
         station.setCurrentRadioStation(-1);
@@ -143,6 +143,66 @@ public class RadioTest {
 
         int expected = 9;
         int actual = station.getCurrentRadioStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetSoundVolumeIfNumberIsCorrect() {
+        Radio station = new Radio();
+
+        station.setCurrentSoundVolume(6);
+
+        int expected = 6;
+        int actual = station.getCurrentSoundVolume();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetSoundVolumeIfNumberIsBoundaryMin() {
+        Radio station = new Radio();
+
+        station.setCurrentSoundVolume(0);
+
+        int expected = 0;
+        int actual = station.getCurrentSoundVolume();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetSoundVolumeIfNumberIsBoundaryMax() {
+        Radio station = new Radio();
+
+        station.setCurrentSoundVolume(10);
+
+        int expected = 10;
+        int actual = station.getCurrentSoundVolume();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotSetVolumeSoundIfNumberIsAboveMax() {
+        Radio station = new Radio();
+
+        station.setCurrentSoundVolume(11);
+
+        int expected = 0;
+        int actual = station.getCurrentSoundVolume();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotSetSoundVolumeIfNumberIsBelowMin() {
+        Radio station = new Radio();
+
+        station.setCurrentSoundVolume(-1);
+
+        int expected = 0;
+        int actual = station.getCurrentSoundVolume();
 
         Assertions.assertEquals(expected, actual);
     }
