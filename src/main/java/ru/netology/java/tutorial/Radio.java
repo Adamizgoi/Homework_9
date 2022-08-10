@@ -1,3 +1,5 @@
+
+package ru.netology.java.tutorial;
 public class Radio {
     int currentRadioStation;
     int currentSoundVolume;
