@@ -38,10 +38,6 @@ public class Radio {
         return amountOfRadioStations;
     }
 
-    public int getMaxRadioStation() {
-        return maxRadioStation;
-    }
-
     public void setCurrentRadioStation(int numberOfStation) {
         maxRadioStation = countMaxStations();
         if (numberOfStation < minRadioStation || numberOfStation > maxRadioStation) {

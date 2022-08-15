@@ -276,21 +276,31 @@ public class RadioTest {
     }
 
     @Test
-    public void mustNotBeAbilityToCustomZeroAmountOfStations() {
+    public void ifAmountOfStationsIsZeroMaxRadioStationsIsStillCorrect() {
         Radio customStation = new Radio(0);
 
         int expected = 0;
-        int actual = customStation.getAmountOfRadioStations();
+        int actual = customStation.countMaxStations();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    public void ifAmountOfStationsLessThanZeroMaxRadioStationsIsStillCorrect() {
+    public void ifAmountOfStationsIsLessZeroMaxRadioStationsIsStillCorrect() {
         Radio customStation = new Radio(-1);
 
         int expected = 0;
-        int actual = customStation.getMaxRadioStation();
+        int actual = customStation.countMaxStations();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotVerifyAmountOfRadioStationsIfZeroOrLess() {
+        Radio customStation = new Radio(-1);
+
+        boolean expected = false;
+        boolean actual = customStation.verifyAmountOfStations();
 
         Assertions.assertEquals(expected, actual);
     }
