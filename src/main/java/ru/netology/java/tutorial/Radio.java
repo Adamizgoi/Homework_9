@@ -1,14 +1,20 @@
 package ru.netology.java.tutorial;
 
+import lombok.*;
+
+@Getter
+@Setter
+@AllArgsConstructor
+
 public class Radio {
     private int amountOfRadioStations = 10;
     private boolean verificationForAmountOfStation;
     private int maxRadioStation;
-    private int minRadioStation = 0;
+    private final int minRadioStation = 0;
     private int currentRadioStation = minRadioStation;
 
-    private int minSoundVolume = 0;
-    private int maxSoundVolume = 100;
+    private final int minSoundVolume = 0;
+    private final int maxSoundVolume = 100;
     private int currentSoundVolume = minSoundVolume;
 
 
@@ -28,14 +34,6 @@ public class Radio {
         verificationForAmountOfStation = verifyAmountOfStations();
         if (verificationForAmountOfStation == true) return maxRadioStation = amountOfRadioStations - 1;
         else return maxRadioStation;
-    }
-
-    public int getCurrentRadioStation() {
-        return currentRadioStation;
-    }
-
-    public int getAmountOfRadioStations() {
-        return amountOfRadioStations;
     }
 
     public void setCurrentRadioStation(int numberOfStation) {
@@ -62,10 +60,6 @@ public class Radio {
             return;
         }
         currentRadioStation = --currentRadioStation;
-    }
-
-    public int getCurrentSoundVolume() {
-        return currentSoundVolume;
     }
 
     public void setCurrentSoundVolume(int loudnessOfSound) {
