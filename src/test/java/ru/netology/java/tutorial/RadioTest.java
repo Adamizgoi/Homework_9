@@ -5,286 +5,302 @@ import org.junit.jupiter.api.Test;
 
 public class RadioTest {
 
+    Radio defaultStation = new Radio();
+    Radio customStation = new Radio(25);
+
+    @Test
+    public void mustBeDefaultModeOfRadioStation() {
+
+        int expected = 10;
+        int actual = defaultStation.getAmountOfRadioStations();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
     @Test
     public void shouldSetRadioStationIfNumberIsCorrect() {
-        Radio station = new Radio();
-
-        station.setCurrentRadioStation(6);
+        customStation.setCurrentRadioStation(6);
 
         int expected = 6;
-        int actual = station.getCurrentRadioStation();
+        int actual = customStation.getCurrentRadioStation();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void shouldSetRadioStationIfNumberIsBoundaryMin() {
-        Radio station = new Radio();
-
-        station.setCurrentRadioStation(0);
+        customStation.setCurrentRadioStation(0);
 
         int expected = 0;
-        int actual = station.getCurrentRadioStation();
+        int actual = customStation.getCurrentRadioStation();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void shouldSetRadioStationIfNumberIsBoundaryMax() {
-        Radio station = new Radio();
+        customStation.setCurrentRadioStation(24);
 
-        station.setCurrentRadioStation(9);
-
-        int expected = 9;
-        int actual = station.getCurrentRadioStation();
+        int expected = 24;
+        int actual = customStation.getCurrentRadioStation();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void shouldNotSetRadioStationIfNumberIsAboveMax() {
-        Radio station = new Radio();
-
-        station.setCurrentRadioStation(10);
+        customStation.setCurrentRadioStation(25);
 
         int expected = 0;
-        int actual = station.getCurrentRadioStation();
+        int actual = customStation.getCurrentRadioStation();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void shouldNotSetRadioStationIfNumberIsBelowMin() {
-        Radio station = new Radio();
-
-        station.setCurrentRadioStation(-1);
+        customStation.setCurrentRadioStation(-1);
 
         int expected = 0;
-        int actual = station.getCurrentRadioStation();
+        int actual = customStation.getCurrentRadioStation();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void shouldTurnOnNextRadioStationIfCurrentIsMin() {
-
-        Radio station = new Radio();
-
-        station.nextRadioStation();
+        customStation.nextRadioStation();
 
         int expected = 1;
-        int actual = station.getCurrentRadioStation();
+        int actual = customStation.getCurrentRadioStation();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void shouldTurnOnNextRadioStationIfCurrentIsBetweenMinAndMax() {
-
-        Radio station = new Radio();
-
-        station.setCurrentRadioStation(5);
-        station.nextRadioStation();
+        customStation.setCurrentRadioStation(5);
+        customStation.nextRadioStation();
 
         int expected = 6;
-        int actual = station.getCurrentRadioStation();
+        int actual = customStation.getCurrentRadioStation();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void shouldTurnOnNextZeroStationIfCurrentIsMax() {
-
-        Radio station = new Radio();
-
-        station.setCurrentRadioStation(9);
-        station.nextRadioStation();
+        customStation.setCurrentRadioStation(24);
+        customStation.nextRadioStation();
 
         int expected = 0;
-        int actual = station.getCurrentRadioStation();
+        int actual = customStation.getCurrentRadioStation();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    public void shouldTurnOnPreviousRadioStationIfCurrentIsMax() {
+    public void shouldTurnOnPreviousRadioStationIfCurrentIsDefaultMax() {
+        customStation.setCurrentRadioStation(24);
+        customStation.prevRadioStation();
 
-        Radio station = new Radio();
-
-        station.setCurrentRadioStation(9);
-        station.prevRadioStation();
-
-        int expected = 8;
-        int actual = station.getCurrentRadioStation();
+        int expected = 23;
+        int actual = customStation.getCurrentRadioStation();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void shouldTurnOnPreviousRadioStationIfCurrentIsBetweenMinAndMax() {
-
-        Radio station = new Radio();
-
-        station.setCurrentRadioStation(5);
-        station.prevRadioStation();
+        customStation.setCurrentRadioStation(5);
+        customStation.prevRadioStation();
 
         int expected = 4;
-        int actual = station.getCurrentRadioStation();
+        int actual = customStation.getCurrentRadioStation();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void shouldTurnOnPreviousMaxStationIfCurrentIsMin() {
+        customStation.prevRadioStation();
 
-        Radio station = new Radio();
-
-        station.prevRadioStation();
-
-        int expected = 9;
-        int actual = station.getCurrentRadioStation();
+        int expected = 24;
+        int actual = customStation.getCurrentRadioStation();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void shouldSetSoundVolumeIfNumberIsCorrect() {
-        Radio station = new Radio();
+        customStation.setCurrentSoundVolume(25);
 
-        station.setCurrentSoundVolume(6);
-
-        int expected = 6;
-        int actual = station.getCurrentSoundVolume();
+        int expected = 25;
+        int actual = customStation.getCurrentSoundVolume();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void shouldSetSoundVolumeIfNumberIsBoundaryMin() {
-        Radio station = new Radio();
-
-        station.setCurrentSoundVolume(0);
+        customStation.setCurrentSoundVolume(0);
 
         int expected = 0;
-        int actual = station.getCurrentSoundVolume();
+        int actual = customStation.getCurrentSoundVolume();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void shouldSetSoundVolumeIfNumberIsBoundaryMax() {
-        Radio station = new Radio();
+        customStation.setCurrentSoundVolume(100);
 
-        station.setCurrentSoundVolume(10);
-
-        int expected = 10;
-        int actual = station.getCurrentSoundVolume();
+        int expected = 100;
+        int actual = customStation.getCurrentSoundVolume();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void shouldNotSetVolumeSoundIfNumberIsAboveMax() {
-        Radio station = new Radio();
-
-        station.setCurrentSoundVolume(11);
+        customStation.setCurrentSoundVolume(101);
 
         int expected = 0;
-        int actual = station.getCurrentSoundVolume();
+        int actual = customStation.getCurrentSoundVolume();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void shouldNotSetSoundVolumeIfNumberIsBelowMin() {
-        Radio station = new Radio();
-
-        station.setCurrentSoundVolume(-1);
+        customStation.setCurrentSoundVolume(-1);
 
         int expected = 0;
-        int actual = station.getCurrentSoundVolume();
+        int actual = customStation.getCurrentSoundVolume();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void shouldIncreaseSoundVolumeIfCurrentIsMin() {
-
-        Radio station = new Radio();
-
-        station.increaseSoundVolume();
+        customStation.increaseSoundVolume();
 
         int expected = 1;
-        int actual = station.getCurrentSoundVolume();
+        int actual = customStation.getCurrentSoundVolume();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void shouldIncreaseSoundVolumeIfCurrentIsBetweenMinAndMax() {
-
-        Radio station = new Radio();
-
-        station.setCurrentSoundVolume(5);
-        station.increaseSoundVolume();
+        customStation.setCurrentSoundVolume(5);
+        customStation.increaseSoundVolume();
 
         int expected = 6;
-        int actual = station.getCurrentSoundVolume();
+        int actual = customStation.getCurrentSoundVolume();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void shouldNotIncreaseSoundVolumeIfCurrentIsMax() {
+        customStation.setCurrentSoundVolume(100);
+        customStation.increaseSoundVolume();
 
-        Radio station = new Radio();
-
-        station.setCurrentSoundVolume(10);
-        station.increaseSoundVolume();
-
-        int expected = 10;
-        int actual = station.getCurrentSoundVolume();
+        int expected = 100;
+        int actual = customStation.getCurrentSoundVolume();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void shouldTurnDownSoundVolumeIfCurrentIsMax() {
+        customStation.setCurrentSoundVolume(100);
+        customStation.turnDownSoundVolume();
 
-        Radio station = new Radio();
-
-        station.setCurrentSoundVolume(10);
-        station.turnDownSoundVolume();
-
-        int expected = 9;
-        int actual = station.getCurrentSoundVolume();
+        int expected = 99;
+        int actual = customStation.getCurrentSoundVolume();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void shouldTurnDownSoundVolumeIfCurrentIsBetweenMinAndMax() {
-
-        Radio station = new Radio();
-
-        station.setCurrentSoundVolume(5);
-        station.turnDownSoundVolume();
+        customStation.setCurrentSoundVolume(5);
+        customStation.turnDownSoundVolume();
 
         int expected = 4;
-        int actual = station.getCurrentSoundVolume();
+        int actual = customStation.getCurrentSoundVolume();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void shouldNotDownSoundVolumeIfCurrentIsMin() {
-
-        Radio station = new Radio();
-
-        station.turnDownSoundVolume();
+        customStation.turnDownSoundVolume();
 
         int expected = 0;
-        int actual = station.getCurrentSoundVolume();
+        int actual = customStation.getCurrentSoundVolume();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void mustBeAbilityToCustomAmountOfStationsEqualToDefault() {
+        Radio customStation = new Radio(10);
+
+        int expected = 10;
+        int actual = customStation.getAmountOfRadioStations();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void mustBeAbilityToCustomAmountOfStationsLessThanDefault() {
+        Radio customStation = new Radio(6);
+
+        int expected = 6;
+        int actual = customStation.getAmountOfRadioStations();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void mustBeAbilityToCustomAmountOfStationsPlusOneToMin() {
+        Radio customStation = new Radio(1);
+
+        int expected = 1;
+        int actual = customStation.getAmountOfRadioStations();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void ifAmountOfStationsIsZeroMaxRadioStationsIsStillCorrect() {
+        Radio customStation = new Radio(0);
+
+        int expected = 0;
+        int actual = customStation.countMaxStations();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void ifAmountOfStationsIsLessZeroMaxRadioStationsIsStillCorrect() {
+        Radio customStation = new Radio(-1);
+
+        int expected = 0;
+        int actual = customStation.countMaxStations();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotVerifyAmountOfRadioStationsIfZeroOrLess() {
+        Radio customStation = new Radio(-1);
+
+        boolean expected = false;
+        boolean actual = customStation.verifyAmountOfStations();
 
         Assertions.assertEquals(expected, actual);
     }

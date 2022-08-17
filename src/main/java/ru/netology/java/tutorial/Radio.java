@@ -1,58 +1,85 @@
-
 package ru.netology.java.tutorial;
-public class Radio {
-    int currentRadioStation;
-    int currentSoundVolume;
 
-    public int getCurrentRadioStation() {
-        return currentRadioStation;
+import lombok.*;
+
+@Getter
+@Setter
+@AllArgsConstructor
+
+public class Radio {
+    private int amountOfRadioStations = 10;
+    private boolean verificationForAmountOfStation;
+    private int maxRadioStation;
+    private final int minRadioStation = 0;
+    private int currentRadioStation = minRadioStation;
+
+    private final int minSoundVolume = 0;
+    private final int maxSoundVolume = 100;
+    private int currentSoundVolume = minSoundVolume;
+
+
+    public Radio(int amountOfRadioStations) {
+        this.amountOfRadioStations = amountOfRadioStations;
+    }
+
+    public Radio() {
+    }
+
+    public boolean verifyAmountOfStations() {
+        if (amountOfRadioStations <= 0) return false;
+        else return true;
+    }
+
+    public int countMaxStations() {
+        verificationForAmountOfStation = verifyAmountOfStations();
+        if (verificationForAmountOfStation == true) return maxRadioStation = amountOfRadioStations - 1;
+        else return maxRadioStation;
     }
 
     public void setCurrentRadioStation(int numberOfStation) {
-        if (numberOfStation < 0 || numberOfStation > 9) {
+        maxRadioStation = countMaxStations();
+        if (numberOfStation < minRadioStation || numberOfStation > maxRadioStation) {
             return;
         }
         currentRadioStation = numberOfStation;
     }
 
     public void nextRadioStation() {
-        if (currentRadioStation == 9) {
-            currentRadioStation = 0;
+        maxRadioStation = countMaxStations();
+        if (currentRadioStation == maxRadioStation) {
+            currentRadioStation = minRadioStation;
             return;
         }
-        currentRadioStation = currentRadioStation + 1;
+        currentRadioStation = ++currentRadioStation;
     }
 
     public void prevRadioStation() {
-        if (currentRadioStation == 0) {
-            currentRadioStation = 9;
+        maxRadioStation = countMaxStations();
+        if (currentRadioStation == minRadioStation) {
+            currentRadioStation = maxRadioStation;
             return;
         }
-        currentRadioStation = currentRadioStation - 1;
-    }
-
-    public int getCurrentSoundVolume() {
-        return currentSoundVolume;
+        currentRadioStation = --currentRadioStation;
     }
 
     public void setCurrentSoundVolume(int loudnessOfSound) {
-        if (loudnessOfSound < 0 || loudnessOfSound > 10) {
+        if (loudnessOfSound < minSoundVolume || loudnessOfSound > maxSoundVolume) {
             return;
         }
         currentSoundVolume = loudnessOfSound;
     }
 
     public void increaseSoundVolume() {
-        if (currentSoundVolume == 10) {
+        if (currentSoundVolume == maxSoundVolume) {
             return;
         }
-        currentSoundVolume = currentSoundVolume + 1;
+        currentSoundVolume = ++currentSoundVolume;
     }
 
     public void turnDownSoundVolume() {
-        if (currentSoundVolume == 0) {
+        if (currentSoundVolume == minSoundVolume) {
             return;
         }
-        currentSoundVolume = currentSoundVolume - 1;
+        currentSoundVolume = --currentSoundVolume;
     }
 }
